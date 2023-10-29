@@ -5,11 +5,11 @@ const app = express();
 const port = 3000;
 
 const pool = new Pool({
-  user: "miguel.jallaza",
-  host: "localhost",
-  database: "proyecto-final",
-  password: "admin123",
-  port: "5432",
+  user: "postgres",
+  host: "viaduct.proxy.rlwy.net",
+  database: "railway",
+  password: "5GCg6Ec5bGf3**bb6dG5DafCF5cG-CG6",
+  port: "26587",
 });
 
 class Model {
