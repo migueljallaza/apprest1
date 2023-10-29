@@ -15,34 +15,34 @@ const pool = new Pool({
 class Model {
 
   async getAverageAges() {
-    const { rows } = await pool.query("SELECT AVG(EXTRACT(YEAR FROM AGE(NOW(), fecha_nacimiento))) AS promedio_edad FROM sfe_giec.usuario;");
+    const { rows } = await pool.query("SELECT AVG(EXTRACT(YEAR FROM AGE(NOW(), fecha_nacimiento))) AS promedio_edad FROM public.usuario;");
     return rows;
   }
 
   async getAllUsers() {
-    const { rows } = await pool.query("SELECT * FROM sfe_giec.usuario;");
+    const { rows } = await pool.query("SELECT * FROM public.usuario;");
     return rows;
   }
 
   async getUserById(id) {
-    const { rows } = await pool.query("SELECT * FROM sfe_giec.usuario where id = $1;", [
+    const { rows } = await pool.query("SELECT * FROM public.usuario where id = $1;", [
       id,
     ]);
     return rows[0];
   }
 
   async addUser(cedula_identidad, nombres, primer_apellido, segundo_apellido, fecha_nacimiento) {
-    await pool.query("INSERT INTO sfe_giec.usuario (cedula_identidad, nombres, primer_apellido, segundo_apellido, fecha_nacimiento) values ($1, $2, $3, $4, $5)", 
+    await pool.query("INSERT INTO public.usuario (cedula_identidad, nombres, primer_apellido, segundo_apellido, fecha_nacimiento) values ($1, $2, $3, $4, $5)", 
                   [cedula_identidad, nombres, primer_apellido, segundo_apellido, fecha_nacimiento]);
   }
 
   async updateUser(id, cedula_identidad, nombres, primer_apellido, segundo_apellido, fecha_nacimiento) {
-    await pool.query("UPDATE sfe_giec.usuario SET cedula_identidad = $1, nombres = $2, primer_apellido = $3, segundo_apellido = $4, fecha_nacimiento = $5 WHERE id = $6", 
+    await pool.query("UPDATE public.usuario SET cedula_identidad = $1, nombres = $2, primer_apellido = $3, segundo_apellido = $4, fecha_nacimiento = $5 WHERE id = $6", 
                   [cedula_identidad, nombres, primer_apellido, segundo_apellido, fecha_nacimiento, id]);
   }
 
   async deleteUser(id) {
-    await pool.query("DELETE FROM sfe_giec.usuario WHERE id = $1", [id]);
+    await pool.query("DELETE FROM public.usuario WHERE id = $1", [id]);
   }
 }
 
